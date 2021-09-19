@@ -1,0 +1,59 @@
+var modalWrap = null;
+/**
+ * 
+ * @param {string} title 
+ * @param {string} description content of modal body 
+ * @param {string} yesBtnLabel label of Yes button 
+ * @param {string} noBtnLabel label of No button 
+ * @param {function} callback callback function when click Yes button
+ */
+
+
+const showModal = (title, description, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', callback) => {
+  if (modalWrap !== null) {
+    modalWrap.remove();
+  }
+
+  modalWrap = document.createElement('div');
+  modalWrap.innerHTML = `
+    <div class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title">Editar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="update" class="form-control mr-2">
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="button" id="Confirm" class="btn btn-primary modal-success-btn" data-bs-dismiss="modal" >Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+
+
+  modalWrap.querySelector('.modal-success-btn').onclick = callback;
+  document.body.append(modalWrap);
+
+  var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'));
+  modal.show();
+
+}
+
+var dato =  document.getElementById('click');
+dato.addEventListener('click', function(){
+   console.log('Click 2');
+ });
+
+var datoModal = document.getElementById('Confirm');
+datoModal.addEventListener('click', function(){
+   console.log('Click modal');
+ });
+
+
+
